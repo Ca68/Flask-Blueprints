@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h3>Single Blog Post</h3>
+    <hr />
+
+<a class="btn btn-info" href="{{ url_for('blog.home') }}">Back
+
+</a>
+
+    <li class="list-group-item">
+		<p> 
+            
+           {{ p['body']}}
+        </p>
+		<div>
+			<span>
+				<cite>&mdash; {{ p.author }}</cite>
+				<small class="float-right">{{ p.timestamp }}</small>
+			</span>
+​
+		</div>
+	</li>
+
+{% endblock content %}
