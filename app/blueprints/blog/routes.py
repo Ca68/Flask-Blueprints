@@ -1,44 +1,19 @@
-from flask import render_template, url_for
+from flask import render_template, url_for, flash, redirect
+from app.blueprints.blog.models import Post
 from .import bp as app
+from app import db
+from flask_login import current_user
 
 
-posts = [
-        {
-            'id': 1,
-            'body': 'This is the first blog post',
-            'author': 'Lucas L.',
-            'timestamp': '10-2-2020'
-            },
-        {
-            'id': 2,
-            'body': 'This is the first blog post',
-            'author': 'Derek H.',
-            'timestamp': '10-3-2020'
-            },
-        {
-            'id': 3,
-            'body': 'This is the first blog post',
-            'author': 'Joel Carter',
-            'timestamp': '10-5-2020'
-            }
-    ]
 
 
-@app.route('/')
-def home():  
-    context = {
-        'posts': posts
-    }
-    return render_template('home.html', **context)
-
-
-@app.route('/blog/<int:id>')
+@app.route('/post/<int:id>')
 def get_post(id):
-    for p in posts:
-        if p['id'] == id:
-            post = p
-            break
+   
     context = {
-        'p' : post
+        'p' : Post.query.get(id)
     }
     return render_template('blog-single.html', **context)
+
+
+
