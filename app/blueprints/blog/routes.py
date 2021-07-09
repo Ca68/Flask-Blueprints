@@ -2,12 +2,13 @@ from flask import render_template, url_for, flash, redirect
 from app.blueprints.blog.models import Post
 from .import bp as app
 from app import db
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 
 
 
 @app.route('/post/<int:id>')
+@login_required
 def get_post(id):
    
     context = {

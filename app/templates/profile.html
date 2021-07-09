@@ -7,10 +7,10 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <img class="img-fluid" src="https://via.placeholder.com/1000x1500" alt="profile">
+        <img class="img-fluid" src={{ current_user.image}} alt="profile">
     </div>
     <div class="col-md">
-        <form action="{{ url_for('main.profile') }}" method="POST">
+        <form action="{{ url_for('main.profile') }}" method="POST" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -39,14 +39,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <input type="file" class="form-control-file" name="" id="" placeholder="" />
+                        <input type="file" class="form-control-file" name="profile_image" id="" placeholder="" />
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <textarea class="form-control" name="" id="" rows="30" placeholder="Type bio here"></textarea>
+                        <textarea class="form-control" name="bio" id="" rows="30" placeholder="Type bio here">{{ current_user.bio }}</textarea>
                     </div>
                 </div>
             </div>

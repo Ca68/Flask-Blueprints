@@ -2,7 +2,7 @@ from .import bp as app
 from app import db
 from flask import render_template, url_for, request, redirect, flash, get_flashed_messages
 from .models import User
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 
 
@@ -45,6 +45,7 @@ def register():
     return render_template('authentication/register.html')
 
 @app.route('/logout')
+@login_required
 def logout():
     get_flashed_messages()
     logout_user()
