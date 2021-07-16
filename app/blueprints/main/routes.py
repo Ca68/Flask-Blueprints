@@ -1,8 +1,8 @@
 
-from flask.helpers import flash, url_for
+
 from werkzeug.utils import redirect
 from .import bp as app
-from flask import render_template, request, url_for, flash, get_flashed_messages
+from flask import render_template, request, url_for, flash
 from flask_login import current_user, login_required
 from app import db, mail
 from flask_mail import Message
@@ -30,7 +30,7 @@ def home():
 
 @app.route('/', methods=['GET', 'POST'])
 def add_post():
-    get_flashed_messages()
+    
     if request.method == 'POST':
 
         #post=Post.query.get(current_user.id)
@@ -61,7 +61,7 @@ def profile():
         u.email = request.form.get('email')
         u.bio = request.form.get('bio')
     
-        if len(request.files) > 0:
+        if request.files.get('profile-image'):
             s3.upload_fileobj(
                 request.files.get('profile-image'),
                 'codingtempledelete',

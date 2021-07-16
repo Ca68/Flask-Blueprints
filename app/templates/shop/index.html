@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+​
+{% block content %}
+    <p>This is the Shop Page.</p>
+    <hr>
+​
+    <div class="card-deck">
+            {% for p in products %} 
+
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6>
+                                {{ p.name }}
+                                <span class="float-right">{{ '{:,.2f}'.format(p.price / 100) }}</span>
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <img class="card-img-top" src="{{ p.image }}" alt="{{ p.name }}">
+                            <a class="btn btn-success btn-block"  style="margin-top: 10px;" href=" {{ url_for('shop.add_to_cart', id=p.id) }}">Add to cart</a>
+                            <p class="card-text" style="margin-top: 10px;">{{ p.description }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %} 
+
+
+    </div>
+        
+{% endblock content %}

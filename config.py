@@ -19,4 +19,6 @@ class Config:
     MAIL_PORT = os.getenv('MAIL_PORT')
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_USE_SSL = os.getenv('MAIL_USE_SSL')
+    STRIPE_PUBLISHABLE_KEY=  os.getenv('STRIPE_PUBLISHABLE_KEY')
+    STRIPE_SECRET_KEY= os.getenv('STRIPE_SECRET_KEY')
    

@@ -9,3 +9,7 @@ footer {
 .content-spacing {
     padding: 35px 0;
 }
+
+p.card-text {
+    min-height: 48px;
+}

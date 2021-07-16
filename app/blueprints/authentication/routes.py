@@ -1,6 +1,6 @@
 from .import bp as app
 from app import db
-from flask import render_template, url_for, request, redirect, flash, get_flashed_messages
+from flask import render_template, url_for, request, redirect, flash
 from .models import User
 from flask_login import login_user, logout_user, login_required
 
@@ -8,7 +8,7 @@ from flask_login import login_user, logout_user, login_required
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    get_flashed_messages()
+   
     if request.method == 'POST':
         emailData = request.form.get('email')
         passwordData = request.form.get('password')
@@ -24,7 +24,7 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    get_flashed_messages()
+    
     if request.method == 'POST':
         user = User.query.filter_by(email=request.form.get('email')).first()
         if user is not None:
@@ -47,7 +47,7 @@ def register():
 @app.route('/logout')
 @login_required
 def logout():
-    get_flashed_messages()
+    
     logout_user()
     flash('User logged out sucessfully.', 'warning')
     return redirect(url_for('authentication.login'))
