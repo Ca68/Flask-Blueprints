@@ -10,7 +10,7 @@ from app.blueprints.authentication.models import User
 from app.blueprints.blog.models import Post
 import boto3
 from flask import current_app
-import time
+import time, smtplib
 from werkzeug.utils import secure_filename
 
 

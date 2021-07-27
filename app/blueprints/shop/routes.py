@@ -111,7 +111,6 @@ def checkout():
 # Delete items from cart
 @app.route('/delete/<product_id>', methods=['DELETE', 'POST'])
 def delete_product(product_id):
-    print('Hello')
     product=StripeProduct.query.get(product_id)
     db.session.delete(Cart.query.filter_by(user_id=current_user.id, product=product.stripe_product_id).first())
     db.session.commit()
@@ -119,10 +118,16 @@ def delete_product(product_id):
     return redirect(url_for('shop.cart'))
         
 
-@app.route('/update/', methods=['POST'])
+@app.route('/update/<product_id>', methods=['POST'])
 def update_cart():
-
-    return redirect(url_for('shop.cart'))
+    if request.method == "POST":
+        product=StripeProduct.query.get(product_id)
+        quantity = request.form.get('quantity')
+        submit_update = (Cart.query.get(user_id=current_user.id, product_id=stripe_product_id).all())
+        db.session.submit_update()
+        db.session.commit()
+        flash("Cart updated")
+        return redirect(url_for('shop.cart'))
 
 
 

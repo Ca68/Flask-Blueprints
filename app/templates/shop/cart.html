@@ -34,9 +34,10 @@
                             </div>
                         </div>
                         <div class="col-2 col-sm-2 col-md-2 text-right">
-                            <form id="delete-form" action="{{ url_for('shop.delete_product', product_id=p.id) }}" method="delete">
+                            <form id="delete-form" action="{{ url_for('shop.delete_product', product_id=p.id) }}" method="POST">
                                 
                                 <button type="submit" class="btn btn-outline-danger btn-xs">
+                                    
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                 </button>
                             </form>
@@ -48,7 +49,9 @@
             <!-- END PRODUCT -->
             {% endfor %}
             <div class="pull-right">
-                <a href="" id="submit_update" type="submit" class="btn btn-outline-secondary pull-right">Update Shopping Cart</a>
+                <form id="update-form" action="{{ url_for('shop.update_cart') }}" method="POST">
+                <button href="" id="submit_update" type="submit" class="btn btn-outline-secondary pull-right">Update Shopping Cart</button>
+                </form>
             </div>
         </div>
         <div class="card-footer">
@@ -90,7 +93,7 @@
 ​
     <script>
         var stripe = Stripe('{{ STRIPE_PUBLISHABLE_KEY }}')
-
+        
         $('#checkout-form').on('submit', function(e) {
             e.preventDefault();
             fetch('{{ url_for("shop.checkout") }}', {
@@ -105,18 +108,18 @@
             .then(data => stripe.redirectToCheckout({ sessionId: data['session_id'] }))
         })
 
-        //$('#submit_update').on('submit', function(e) {
-        //    e.preventDefault();
-        //    fetch('{{ url_for("shop.update_cart") }}', {
-        //       'method': 'POST',
-        //      'mode': 'cors',
-        //      'headers': {
-        //          'Content-Type': 'application/json'
-        //      },
-        //      body: JSON.stringify({ 'message': 'This works' })
-        // })
-        //  .then(res => res.json())
-        //  .then(data => stripe.redirectToCheckout({ sessionId: data['session_id'] }))
-        //})
+        $('#submit_update').on('submit', function(e) {
+            e.preventDefault();
+            fetch('{{ url_for("shop.update_cart") }}', {
+               'method': 'POST',
+              'mode': 'cors',
+              'headers': {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ 'message': 'This works' })
+         })
+          .then(res => res.json())
+          .then(data => stripe.redirectToCheckout({ sessionId: data['session_id'] }))
+        })
     </script>
 {% endblock scripts %}
