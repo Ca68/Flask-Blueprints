@@ -30,6 +30,7 @@ def cart():
     """ 
     from app.context_processors import build_cart
     display_cart = build_cart()['cart_dict']
+    print(display_cart)
     session['session_display_cart'] = display_cart
     context = {
         'cart' : display_cart.values()
@@ -67,7 +68,7 @@ def shop_success():
 def shop_failure():
     pass
 
-@app.route('/checkout', methods=['POST'])
+@app.route('/checkout', methods=['GET', 'POST'])
 def checkout():
     stripe.api_key = current_app.config.get('STRIPE_SECRET_KEY')
     dc = session.get('session_display_cart')

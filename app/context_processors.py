@@ -1,5 +1,5 @@
 from flask_login import current_user
-from flask import current_app as app
+from flask import current_app as app, session
 from app.blueprints.shop.models import Cart, Product, StripeProduct
 from functools import reduce
 
@@ -38,6 +38,8 @@ def build_cart():
 
     def format_currency(price):
         return f'${price:,.2f}'
+
+    session['session_display_cart'] = cart_dict
 
     return {
             'cart_dict': cart_dict,
